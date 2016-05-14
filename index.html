@@ -54,16 +54,15 @@
 
 <p>Think of this like the top level in a big data hierarchy.  Each of the "children categories" is a link to a group of related data.  This is the best way to navigate the API and find what you're looking for.  The coolest part is that it shows you right on the page how to make the API call to what you're currently looking at.  So let's do that.  Let's make a call to this page and see if we can receive a JSON object giving us each of these top-level categories.  Write and execute the following javascript code.  </p>
 
-<pre><code>var req = new XMLHttpRequest();
-var url = "http://api.eia.gov/category/?";
-var api_key = "api_key=45AF218653356B8673FD6F039FC9AB94";
-var query = "&amp;category_id=371";
-req.open("GET", url + api_key + query, true);
-req.addEventListener('load', function(){
-var response = JSON.parse(req.responseText);
-console.log(response);
-req.send(null);
-</code></pre>
+<p><code>var req = new XMLHttpRequest();</code>
+    <code>var url = "http://api.eia.gov/category/?";</code>
+    <code>var api_key = "api_key=45AF218653356B8673FD6F039FC9AB94";</code>
+    <code>var query = "&amp;category_id=371";</code>
+    <code>req.open("GET", url + api_key + query, true);</code>
+    <code>req.addEventListener('load', function(){</code>
+    <code>var response = JSON.parse(req.responseText);</code>
+    <code>console.log(response);</code>
+    <code>req.send(null);</code></p>
 
 <p>If we run the above code and examine the output in the console, we can see that we received a JSON object the the name "EIA Data Sets" and that there is an object corresponding to each of the children categories.</p>
 
