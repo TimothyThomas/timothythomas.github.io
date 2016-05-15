@@ -75,9 +75,8 @@
 
 <p>Ok, that was a good first example.  In the next few API calls, we'll mainly just be changing these two lines of the previous code block to match the query string for the data we're trying to access:</p>
 
-<pre><code>`var url = "http://api.eia.gov/category/?";`
-`var query = "&amp;category_id=371";`
-</code></pre>
+<p><code>var url = "http://api.eia.gov/category/?";</code>
+    <code>var query = "&amp;category_id=371";</code></p>
 
 <h3>
 <a id="getting-some-real-data" class="anchor" href="#getting-some-real-data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Some Real Data</h3>
@@ -96,9 +95,8 @@
 
 <p>Oops!  That didn't work.  Can you figure out why?  We have to change our URL as well since we are now querying a series instead of categories.  So let's create a new variable called <code>type</code> that we can change depending on which the kind of data we are requesting.  Here's what the entire request code looks like:</p>
 
-<p><code>
-</code>var req = new XMLHttpRequest();<code>
-</code>var url = "<a href="http://api.eia.gov/%22;%60">http://api.eia.gov/";`</a>
+<p><code>var req = new XMLHttpRequest();</code>
+    <code>var url = "http://api.eia.gov/";</code>
     <code>var type = "series/?";</code>
     <code>var api_key = "api_key=45AF218653356B8673FD6F039FC9AB94";</code>
     <code>var query = "&amp;series_id=TOTAL.NUETSUS.A";</code>
