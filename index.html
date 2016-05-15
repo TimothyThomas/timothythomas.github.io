@@ -63,8 +63,8 @@
 
 <span class="pl-smi">req</span>.<span class="pl-c1">open</span>(<span class="pl-s"><span class="pl-pds">"</span>GET<span class="pl-pds">"</span></span>, url <span class="pl-k">+</span> api_key <span class="pl-k">+</span> query, <span class="pl-c1">true</span>);
 <span class="pl-smi">req</span>.<span class="pl-en">addEventListener</span>(<span class="pl-s"><span class="pl-pds">'</span>load<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(){
-<span class="pl-k">var</span> response <span class="pl-k">=</span> <span class="pl-c1">JSON</span>.<span class="pl-c1">parse</span>(<span class="pl-smi">req</span>.<span class="pl-smi">responseText</span>);
-<span class="pl-en">console</span>.<span class="pl-c1">log</span>(response);
+    <span class="pl-k">var</span> response <span class="pl-k">=</span> <span class="pl-c1">JSON</span>.<span class="pl-c1">parse</span>(<span class="pl-smi">req</span>.<span class="pl-smi">responseText</span>);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(response);
 });
 <span class="pl-smi">req</span>.<span class="pl-c1">send</span>(<span class="pl-c1">null</span>);</pre></div>
 
@@ -74,8 +74,8 @@
 
 <p>Ok, that was a good first example.  In the next few API calls, we'll mainly just be changing these two lines of the previous code block to match the query string for the data we're trying to access:</p>
 
-<p><code>var url = "http://api.eia.gov/category/?";</code>
-    <code>var query = "&amp;category_id=371";</code></p>
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> url <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>http://api.eia.gov/category/?<span class="pl-pds">"</span></span>;
+<span class="pl-k">var</span> query <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>&amp;category_id=371<span class="pl-pds">"</span></span>;</pre></div>
 
 <h3>
 <a id="getting-some-real-data" class="anchor" href="#getting-some-real-data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Some Real Data</h3>
@@ -90,22 +90,21 @@
 
 <p>Excellent!  Exactly what we wanted.  We can see on this page a nice plot showing the percentage of U.S. electricity that came from nuclear power on an annual basis.  Now to get this data using the API, all we have to do is use the query string given to us on this page.  Let's modify our code and see if we can get a JSON object containing this data.  All we have to do is change our query variable, right?</p>
 
-<p><code>var query = "&amp;series_id=TOTAL.NUETSUS.A";</code></p>
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> query <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>&amp;series_id=TOTAL.NUETSUS.A<span class="pl-pds">"</span></span>;</pre></div>
 
 <p>Oops!  That didn't work.  Can you figure out why?  We have to change our URL as well since we are now querying a series instead of categories.  So let's create a new variable called <code>type</code> that we can change depending on which the kind of data we are requesting.  Here's what the entire request code looks like:</p>
 
-<p><code>var req = new XMLHttpRequest();</code>
-    <code>var url = "http://api.eia.gov/";</code>
-    <code>var type = "series/?";</code>
-    <code>var api_key = "api_key=45AF218653356B8673FD6F039FC9AB94";</code>
-    <code>var query = "&amp;series_id=TOTAL.NUETSUS.A";</code>
-    <code>req.open("GET", url + type + api_key + query, true);</code>
-    <code>req.addEventListener('load', function() {</code>
-        <code>var response = JSON.parse(req.responseText);</code>
-        <code>console.log(response);</code>
-    <code>});</code>
-    <code>req.send(null);</code>
-`</p>
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> req <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">XMLHttpRequest</span>();
+<span class="pl-k">var</span> url <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>http://api.eia.gov/<span class="pl-pds">"</span></span>;
+<span class="pl-k">var</span> type <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>series/?<span class="pl-pds">"</span></span>;
+<span class="pl-k">var</span> api_key <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>api_key=45AF218653356B8673FD6F039FC9AB94<span class="pl-pds">"</span></span>;
+<span class="pl-k">var</span> query <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>&amp;series_id=TOTAL.NUETSUS.A<span class="pl-pds">"</span></span>;
+<span class="pl-smi">req</span>.<span class="pl-c1">open</span>(<span class="pl-s"><span class="pl-pds">"</span>GET<span class="pl-pds">"</span></span>, url <span class="pl-k">+</span> type <span class="pl-k">+</span> api_key <span class="pl-k">+</span> query, <span class="pl-c1">true</span>);
+<span class="pl-smi">req</span>.<span class="pl-en">addEventListener</span>(<span class="pl-s"><span class="pl-pds">'</span>load<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>() {
+    <span class="pl-k">var</span> response <span class="pl-k">=</span> <span class="pl-c1">JSON</span>.<span class="pl-c1">parse</span>(<span class="pl-smi">req</span>.<span class="pl-smi">responseText</span>);
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(response);
+});
+<span class="pl-smi">req</span>.<span class="pl-c1">send</span>(<span class="pl-c1">null</span>);</pre></div>
 
 <p>Examining the output in the console, we see that nested in the response object is an array of data which is the same as what was shown on the API browser page.  </p>
 
