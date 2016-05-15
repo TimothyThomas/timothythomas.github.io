@@ -101,17 +101,14 @@
 </code>var url = "<a href="http://api.eia.gov/%22;%60">http://api.eia.gov/";`</a>
     <code>var type = "series/?";</code>
     <code>var api_key = "api_key=45AF218653356B8673FD6F039FC9AB94";</code>
-    <code>var query = "&amp;series_id=TOTAL.NUETSUS.A";</code></p>
-
-<pre><code>`req.open("GET", url + type + api_key + query, true);`
-`req.addEventListener('load', function() {`
-    `var response = JSON.parse(req.responseText);`
-    `console.log(response);`
-`});`
-`req.send(null);`
-</code></pre>
-
-<p>`</p>
+    <code>var query = "&amp;series_id=TOTAL.NUETSUS.A";</code>
+    <code>req.open("GET", url + type + api_key + query, true);</code>
+    <code>req.addEventListener('load', function() {</code>
+        <code>var response = JSON.parse(req.responseText);</code>
+        <code>console.log(response);</code>
+    <code>});</code>
+    <code>req.send(null);</code>
+`</p>
 
 <p>Examining the output in the console, we see that nested in the response object is an array of data which is the same as what was shown on the API browser page.  </p>
 
