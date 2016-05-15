@@ -1,32 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
+    <meta charset="UTF-8">
     <title>Getting Started Using the EIA&#39;s Web API by TimothyThomas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Getting Started Using the EIA&#39;s Web API</h1>
+      <h2 class="project-tagline">A How-To Guide for Accessing the Open Data Share by the U.S. Energy Information Administration</h2>
+    </section>
 
-    <header>
-      <div class="container">
-        <h1>Getting Started Using the EIA&#39;s Web API</h1>
-        <h2>A How-To Guide for Accessing the Open Data Share by the U.S. Energy Information Administration</h2>
-
-        <section id="downloads">
-          <a href="https://github.com/TimothyThomas" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
-
-    <div class="container">
-      <section id="main_content">
-        <h3>
+    <section class="main-content">
+      <h3>
 <a id="purpose" class="anchor" href="#purpose" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Purpose</h3>
 
 <p>This guide will show you how to get started using the <a href="www.eia.gov/opendata">web API</a> provided by the <a href="www.eia.gov">U.S. Energy Information Administration</a> to access interesting data and statistics.  This API provides access to all kinds of interesting data related to energy usage in the U.S.  For example, you can access data on electricity consumption and pricing, use of natural resources like oil, coal and natural gas, and the energy outlook on both a short and long-term basis you can even get hourly updates on the day-ahead demand forecast for electricity usage.  Much of this data is available on a regional level or nationwide.  There is even a large set of data related to international energy usage. </p>
@@ -116,14 +106,34 @@
 });
 <span class="pl-smi">req</span>.<span class="pl-c1">send</span>(<span class="pl-c1">null</span>);</pre></div>
 
-<p>Examining the output in the console, we see that nested in the response object is an array of data which is the same as what was shown on the API browser page.  </p>
+<p>Examining the output in the console, we see that nested in the response object is an array of data containing the same values as shown on the API browser page.  </p>
 
 <p><img src="https://timothythomas.github.io/images/nuke_share_output.png" alt="Nuclear Energy Overview"></p>
 
 <p>There is an array of objects each containing a year and a percentage value (e.g. 2013 and 19.4).  The value is the percentage of electricity that came from nuclear power.</p>
-      </section>
-    </div>
 
-    
+<h3>
+<a id="embedding-a-visualization" class="anchor" href="#embedding-a-visualization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Embedding a Visualization</h3>
+
+<p>Now that you are able to access the data and have it in a nice JSON object, you can use it however you need in your application, website, whatever.  But, another really handy feature provided by the API is the ability to embed the visualization of this data directly into your own webpage.  On the API Browser page for this data set, click the link where it says "show me how to embed a chart of this series" (highlighted in screenshot below):</p>
+
+<p><img src="https://timothythomas.github.io/images/chart_embed.png" alt="Nuclear Energy Overview"></p>
+
+<p>This takes you to the following page:</p>
+
+<p><img src="https://timothythomas.github.io/images/html_embed.png" alt="Nuclear Energy Overview"></p>
+
+<p>The EIA has really done a nice job of making it easy to embed visualizations of their data.  Simply copy the provided text directly into an html document and you can have your own webpage containing this visualization.  An the  tag in HTML simply links to another HTML document.  In this case, the EIA has done all the hard work of converting the data into an html visualization and we can simply add the widget to our webpage.  Here is a JSFiddle to demonstrate:</p>
+
+
+
+      <footer class="site-footer">
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
   </body>
 </html>
