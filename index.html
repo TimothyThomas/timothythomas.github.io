@@ -56,18 +56,17 @@
 
 <p>Think of this like the top level in a big data hierarchy.  Each of the "children categories" is a link to a group of related data.  This is the best way to navigate the API and find what you're looking for.  The coolest part is that it shows you right on the page how to make the API call to what you're currently looking at.  So let's do that.  Let's make a call to this page and see if we can receive a JSON object giving us each of these top-level categories.  Write and execute the following javascript code in your web browser or a tool like <a href="https://jsfiddle.net/">JSFiddle</a>.  We're just going to output stuff to the console; so open the console on your browser to see the response.  Remember to replace my api_key with yours!  </p>
 
-<p><code>var req = new XMLHttpRequest();</code>
-    <code>var api_key = "api_key=45AF21865123456789FD6F039FC9AB94";</code>
-    <code>var url = "http://api.eia.gov/category/?";</code>
-    <code>var query = "&amp;category_id=371";</code></p>
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> req <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">XMLHttpRequest</span>();
+<span class="pl-k">var</span> api_key <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>api_key=45AF21865123456789FD6F039FC9AB94<span class="pl-pds">"</span></span>;
+<span class="pl-k">var</span> url <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>http://api.eia.gov/category/?<span class="pl-pds">"</span></span>;
+<span class="pl-k">var</span> query <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>&amp;category_id=371<span class="pl-pds">"</span></span>;
 
-<pre><code>`req.open("GET", url + api_key + query, true);`
-`req.addEventListener('load', function(){`
-`var response = JSON.parse(req.responseText);`
-`console.log(response);`
-`});
-`req.send(null);`
-</code></pre>
+<span class="pl-smi">req</span>.<span class="pl-c1">open</span>(<span class="pl-s"><span class="pl-pds">"</span>GET<span class="pl-pds">"</span></span>, url <span class="pl-k">+</span> api_key <span class="pl-k">+</span> query, <span class="pl-c1">true</span>);
+<span class="pl-smi">req</span>.<span class="pl-en">addEventListener</span>(<span class="pl-s"><span class="pl-pds">'</span>load<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(){
+<span class="pl-k">var</span> response <span class="pl-k">=</span> <span class="pl-c1">JSON</span>.<span class="pl-c1">parse</span>(<span class="pl-smi">req</span>.<span class="pl-smi">responseText</span>);
+<span class="pl-en">console</span>.<span class="pl-c1">log</span>(response);
+});
+<span class="pl-smi">req</span>.<span class="pl-c1">send</span>(<span class="pl-c1">null</span>);</pre></div>
 
 <p>If we run the above code and examine the output in the console, we can see that we received a JSON object with the name "EIA Data Sets" and that there is an object corresponding to each of the children categories.</p>
 
