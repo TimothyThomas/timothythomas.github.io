@@ -38,7 +38,7 @@
         <h3>
 <a id="purpose" class="anchor" href="#purpose" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Purpose</h3>
 
-<p>This guide will show you how to get started using the <a href="www.eia.gov/opendata">web API</a> provided by the <a href="www.eia.gov">U.S. Energy Information Administration</a> to access interesting data and statistics.  This API provides access to all kinds of interesting data related to energy usage in the U.S.  For example, you can access data on electricity consumption and pricing, use of natural resources like oil, coal and natural gas, and the energy outlook on both a short and long-term basis you can even get hourly updates on the day-ahead demand forecast for electricity usage.  Much of this data is available on a regional level or nationwide.  There is even a large set of data related to international energy usage. </p>
+<p>This guide will show you how to get started using the <a href="http://eia.gov/opendata">web API</a> provided by the <a href="http://eia.gov">U.S. Energy Information Administration</a> to access interesting data and statistics.  This API provides access to all kinds of interesting data related to energy usage in the U.S.  For example, you can access data on electricity consumption and pricing, use of natural resources like oil, coal and natural gas, and the energy outlook on both a short and long-term basis you can even get hourly updates on the day-ahead demand forecast for electricity usage.  Much of this data is available on a regional level or nationwide.  There is even a large set of data related to international energy usage. </p>
 
 <p>There is so much data available and types of queries you can make that it may seem overwhelming.  To narrow the scope down a bit for the purpose of showing you how to use this huge database and get what you want out of it, we'll be focusing specifically on nuclear power generation in the U.S.  </p>
 
@@ -47,7 +47,7 @@
 
 <p>Getting an API key is the first step to interacting with the EIA database.  Don't worry, it's free!  You will include this key in the URL query string when making requests to the site.  To get your key, first you need to go register at the EIA website.  The purpose of this registering and getting the key is so that the EIA can notify you of any changes to the API.  They don't state it on their website, but they might also use it to throttle your usage in case you are making an excessive number of requests.</p>
 
-<p>So <a href="www.eia.gov/opendata/register.cfm">go here now</a> to get registered and receive your key!  Here is what the registration form looks like:</p>
+<p>So <a href="http://eia.gov/opendata/register.cfm">go here now</a> to get registered and receive your key!  Here is what the registration form looks like:</p>
 
 <p><img src="https://timothythomas.github.io/images/register.png" alt="registration"></p>
 
@@ -60,7 +60,7 @@
 <h3>
 <a id="api-documentation" class="anchor" href="#api-documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API Documentation</h3>
 
-<p>The EIA's <a href="www.eia.gov/opendata/commands.cfm">API documentation</a> does not provide a great description of the different types of queries that can be made.  If you visit the documentation page you will see terms like "Series Query", "Geoset Query" and "Relation Query" accompanied with a lot of technical jargon.  <strong>We are going to ignore all of this for now.</strong>  For someone just getting started, I would recommend a different approach.  </p>
+<p>The EIA's <a href="http://eia.gov/opendata/commands.cfm">API documentation</a> does not provide a great description of the different types of queries that can be made.  If you visit the documentation page you will see terms like "Series Query", "Geoset Query" and "Relation Query" accompanied with a lot of technical jargon.  <strong>We are going to ignore all of this for now.</strong>  For someone just getting started, I would recommend a different approach.  </p>
 
 <p>The important thing to know for now is that most of the queries that are performed return a time series of data.  Think of a two-column table with the first column being a series of dates and the next column being the value we are interested in.  For example, we could request the yearly percentage of electricity generation that comes from nuclear power plants.</p>
 
@@ -69,7 +69,7 @@
 
 <p>But before we jump straight into getting some real data, let's first try a simple API call to see how it works.  So how do we do that?</p>
 
-<p>Fortunately, the EIA provides a neat tool called the API Browser.  Go to the <a href="http://www.eia.gov/opendata/qb.cfm">API Browser page</a>.  Here you will see a list of the different data sets available.  </p>
+<p>Fortunately, the EIA provides a neat tool called the API Browser.  Go to the <a href="http://eia.gov/opendata/qb.cfm">API Browser page</a>.  Here you will see a list of the different data sets available.  </p>
 
 <p><img src="https://timothythomas.github.io/images/api_browser.png" alt="API Browser"></p>
 
@@ -153,7 +153,7 @@
   &lt;<span class="pl-ent">body</span>&gt;
     &lt;<span class="pl-ent">h1</span>&gt;Example of Embedding a Chart&lt;/<span class="pl-ent">h1</span>&gt;
         &lt;<span class="pl-ent">iframe</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>eia_widget<span class="pl-pds">"</span></span> <span class="pl-e">style</span>=<span class="pl-s"><span class="pl-pds">"</span>width:100%;height:500px<span class="pl-pds">"</span></span>
-        <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>http://www.eia.gov/opendata/embed/iframe.php?series_id=TOTAL.NUETSUS.A<span class="pl-pds">"</span></span>
+        <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>http://eia.gov/opendata/embed/iframe.php?series_id=TOTAL.NUETSUS.A<span class="pl-pds">"</span></span>
         <span class="pl-e">load</span>=<span class="pl-s"><span class="pl-pds">"</span>iframe_load<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">iframe</span>&gt;
   &lt;/<span class="pl-ent">body</span>&gt;
 &lt;/<span class="pl-ent">html</span>&gt;</pre></div>
