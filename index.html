@@ -173,9 +173,12 @@
 <p>The list semicolon separated (';') list of series IDs for up to 100 series. It is recommended to use the POST protocol to transmit the series_id field if more than 10 series are requested in the single call</p>
 </blockquote>
 
-<p>The above tells us two things:
-1. You can request more than 1 series in a single request by simply separating the values in the series_id field with semicolons.
-2. If you are requesting more than 10 series in a single call, you should use the POST protocol.</p>
+<p>The above tells us two things:</p>
+
+<ol>
+<li><p>You can request more than 1 series in a single request by simply separating the values in the series_id field with semicolons.</p></li>
+<li><p>If you are requesting more than 10 series in a single call, you should use the POST protocol.</p></li>
+</ol>
 
 <p>But the documentation doesn't tell you how to perform a POST request.  After some fiddling, I found the following approach works well.  </p>
 
@@ -198,22 +201,21 @@
 
 <div class="highlight highlight-source-js"><pre><span class="pl-smi">req</span>.<span class="pl-c1">setRequestHeader</span>(<span class="pl-s"><span class="pl-pds">"</span>Content-Type<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>application/x-www-form-urlencoded<span class="pl-pds">"</span></span>);  </pre></div>
 
-<p>This communicates to the server that the request body will be in the form of a url-encoded string.  In other words, the actually query will be in the exact same format as our GET request, only now it is in the body of the request.  Finally,
+<p>This communicates to the server that the request body will be in the form of a url-encoded string.  In other words, the actual query will be in the exact same format as our GET request, only now it is in the body of the request.  Finally,
 instead of sending <code>null</code> we send our query string:</p>
 
-<pre><code>req.send(query);                                                              
-</code></pre>
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">req</span>.<span class="pl-c1">send</span>(query);                                                              </pre></div>
 
 <p>If we run the code, here is what the output looks like in the console:</p>
 
-<p><img src="https://timothythomas.github.io/images/post.png" alt="Nuclear Energy Overview"></p>
+<p><img src="https://timothythomas.github.io/images/post_req.png" alt="Nuclear Energy Overview"></p>
 
 <p>Notice this time that we received two objects in the response object.  The first object is the same as our previous GET request with name: "Nuclear Share of Electricity Net Generation, Annual" containing an array of 59 data points and the second object is the new series "Net generation : nuclear : Virginia : all sectors : annual" with 15 data points corresponding to the years 2001 to 2015.  So it worked!</p>
 
 <h3>
 <a id="conclusion" class="anchor" href="#conclusion" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Conclusion</h3>
 
-<p>You now have all the basic tools you need to navigate and make use of the Energy Information Administrations open data API.  Simply explore the API Browser for the data you want, use the API call URL shown on the data series page and then use the data embedded in the JSON object however you need to.  If you simply want to add a visualization to a webpage, consider first using the embedded visualization widgets provided by the EIA.   </p>
+<p>You now have all the basic tools you need to navigate and make use of the Energy Information Administrations open data API.  Simply explore the API Browser for the data you want, use the API call URL shown on the data series page and then use the data embedded in the JSON object however you need to.  If you simply want to add a visualization to a webpage, consider first using the embedded visualization widgets provided by the EIA.   Don't forget, use the POST method if you are requesting several data series in a single call.</p>
       </section>
 
     </div>
