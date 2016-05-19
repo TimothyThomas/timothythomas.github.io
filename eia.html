@@ -2,34 +2,10 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <script>
-      document.addEventListener('DOMContentLoaded', bindButtons);
-      function bindButtons(){
-        document.getElementById('zipSubmit').addEventListener('click', function(event){
-          var req = new XMLHttpRequest();
-          var url = "http://api.eia.gov/series/?";
-          var api_key = "api_key=45AF218653356B8673FD6F039FC9AB94";
-          var query = "&series_id=INTL.27-7-USA-MK.A";
-          req.open("GET", url + api_key + query, false);
-          req.send(null);
-          var response = JSON.parse(req.responseText);
-          console.log(response);
-          event.preventDefault();
-          });
-      };
-    </script>
+    <title>EIA API HowTo</title>
+    <script src="eia.js"></script>
   </head>
   <body>
-    <form>
-        <fieldset>
-            <legend>Get the Weather</legend>
-            <input type="submit" id="zipSubmit">
-        </fieldset>
-    </form>
-    <div>
-        <iframe id="eia_widget" style="width:100%;height:500px"
-        src="//www.eia.gov/opendata/embed/iframe.php?series_id=INTL.27-7-USA-MK.A"
-        load="iframe_load"></iframe>
-    </div>
+     <iframe id="eia_widget" style="width:100%;height:500px" src="http://www.eia.gov/opendata/embed/iframe.php?analysis=indexval&start=2005&geoset_id=INTL.2-2-BKWH.A&map=world&relation_mode=line&regions=USA;CHN"></iframe>
   </body>
 </html>
