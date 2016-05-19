@@ -65,7 +65,7 @@
 <p>The important thing to know for now is that most of the queries that are performed return a time series of data.  Think of a two-column table with the first column being a series of dates and the next column being the value we are interested in.  For example, we could request the yearly percentage of electricity generation that comes from nuclear power plants.</p>
 
 <h3>
-<a id="your-first-api-call" class="anchor" href="#your-first-api-call" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Your First API Call</h3>
+<a id="your-first-api-call--making-a-get-request" class="anchor" href="#your-first-api-call--making-a-get-request" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Your First API Call:  Making a GET request</h3>
 
 <p>But before we jump straight into getting some real data, let's first try a simple API call to see how it works.  So how do we do that?</p>
 
@@ -163,6 +163,52 @@
 <p><img src="https://timothythomas.github.io/images/embed_output.png" alt="Nuclear Energy Overview"></p>
 
 <p>One neat thing about these visualizations is that every time the page is loaded, they will be refreshed with the most up to date data.  So as long as the URL in the embedded iframe does not change, you can be sure your site is always showing the most up to date visualization.</p>
+
+<h3>
+<a id="making-post-request" class="anchor" href="#making-post-request" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Making POST Request</h3>
+
+<p>You can make most of your API calls using just GET requests.  However, there's at least one case where it's important to also know how to make a POST request.  This is very briefly described in the API documentation.  Here is what it says:</p>
+
+<blockquote>
+<p>The list semicolon separated (';') list of series IDs for up to 100 series. It is recommended to use the POST protocol to transmit the series_id field if more than 10 series are requested in the single call</p>
+</blockquote>
+
+<p>The above tells us two things:
+1. You can request more than 1 series in a single request by simply separating the values in the series_id field with semicolons.
+2. If you are requesting more than 10 series in a single call, you should use the POST protocol.</p>
+
+<p>But the documentation doesn't tell you how to perform a POST request.  After some fiddling, I found the following approach works well.  </p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> req <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">XMLHttpRequest</span>();                                               
+<span class="pl-k">var</span> url <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>http://api.eia.gov/<span class="pl-pds">"</span></span>;                                              
+<span class="pl-k">var</span> type <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>series/?<span class="pl-pds">"</span></span>;                                                        
+<span class="pl-k">var</span> api_key <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>api_key=45AF218653356B8673FD6F039FC9AB94<span class="pl-pds">"</span></span>;                     
+<span class="pl-k">var</span> query <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>&amp;series_id=TOTAL.NUETSUS.A;ELEC.GEN.NUC-VA-99.A<span class="pl-pds">"</span></span>;                
+<span class="pl-smi">req</span>.<span class="pl-c1">open</span>(<span class="pl-s"><span class="pl-pds">"</span>POST<span class="pl-pds">"</span></span>, url <span class="pl-k">+</span> type <span class="pl-k">+</span> api_key, <span class="pl-c1">true</span>);                                 
+<span class="pl-smi">req</span>.<span class="pl-c1">setRequestHeader</span>(<span class="pl-s"><span class="pl-pds">"</span>Content-Type<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>application/x-www-form-urlencoded<span class="pl-pds">"</span></span>);    
+<span class="pl-smi">req</span>.<span class="pl-en">addEventListener</span>(<span class="pl-s"><span class="pl-pds">'</span>load<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(){                                      
+    <span class="pl-k">var</span> response <span class="pl-k">=</span> <span class="pl-c1">JSON</span>.<span class="pl-c1">parse</span>(<span class="pl-smi">req</span>.<span class="pl-smi">responseText</span>);                              
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(response)                                                     
+});                                                                           
+<span class="pl-smi">req</span>.<span class="pl-c1">send</span>(query);                                                              </pre></div>
+
+<p>Let's talk about the differences between the above POST request and our previous GET request.  First, you'll notice the <code>query</code> variable includes two series separated by a semi-colon.  The first is the same series as before (% share of nuclear power nationwide).  The second is the total electricity (in gigawatt-hours) generated by nuclear power plants in the state where I live (Virginia).  If you wanted to request several more data series, just append them to this string with semi-colon separation.</p>
+
+<p>The next difference to notice is that we are now passing the "POST" parameter instead of "GET" when we open our request.  However, the URL we pass that includes the query type and our api_key is basically the same, except we have dropped the query string from the URL.  Since in a POST request we pass information in the body of the request, we need to specify the type of content.  That is handled by this line:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">req</span>.<span class="pl-c1">setRequestHeader</span>(<span class="pl-s"><span class="pl-pds">"</span>Content-Type<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>application/x-www-form-urlencoded<span class="pl-pds">"</span></span>);  </pre></div>
+
+<p>This communicates to the server that the request body will be in the form of a url-encoded string.  In other words, the actually query will be in the exact same format as our GET request, only now it is in the body of the request.  Finally,
+instead of sending <code>null</code> we send our query string:</p>
+
+<pre><code>req.send(query);                                                              
+</code></pre>
+
+<p>If we run the code, here is what the output looks like in the console:</p>
+
+<p><img src="https://timothythomas.github.io/images/post.png" alt="Nuclear Energy Overview"></p>
+
+<p>Notice this time that we received two objects in the response object.  The first object is the same as our previous GET request with name: "Nuclear Share of Electricity Net Generation, Annual" containing an array of 59 data points and the second object is the new series "Net generation : nuclear : Virginia : all sectors : annual" with 15 data points corresponding to the years 2001 to 2015.  So it worked!</p>
 
 <h3>
 <a id="conclusion" class="anchor" href="#conclusion" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Conclusion</h3>
